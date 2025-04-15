@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>テーブル予約フォーム</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f7f7f7;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background: #28a745;
+      color: white;
+      border: none;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #218838;
+    }
+  </style>
+</head>
+<body>
+  <h1>テーブル予約フォーム</h1>
+  <form id="reservationForm">
+    <label for="name">お名前</label>
+    <input type="text" id="name" required>
+
+    <label for="phone">電話番号</label>
+    <input type="tel" id="phone" required>
+
+    <label for="email">メールアドレス</label>
+    <input type="email" id="email" required>
+
+    <label for="date">予約日</label>
+    <input type="date" id="date" required>
+
+    <label for="time">予約時間</label>
+    <input type="time" id="time" required>
+
+    <label for="guests">人数</label>
+    <select id="guests" required>
+      <option value="">選択してください</option>
+      <option value="1">1名</option>
+      <option value="2">2名</option>
+      <option value="3">3名</option>
+      <option value="4">4名</option>
+      <option value="5">5名</option>
+      <option value="6">6名以上</option>
+    </select>
+
+    <label for="notes">ご要望など</label>
+    <textarea id="notes" rows="4"></textarea>
+
+    <button type="submit">予約する</button>
+  </form>
+
+  <script>
+    document.getElementById("reservationForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const date = document.getElementById("date").value;
+      const time = document.getElementById("time").value;
+      const guests = document.getElementById("guests").value;
+      const notes = document.getElementById("notes").value.trim();
+
+      if (!name || !phone || !email || !date || !time || !guests) {
+        alert("すべての必須項目を入力してください。");
+        return;
+      }
+
+      let message = `以下の内容で予約を受け付けました。\n\n`;
+      message += `お名前: ${name}\n`;
+      message += `電話番号: ${phone}\n`;
+      message += `メール: ${email}\n`;
+      message += `日付: ${date}\n`;
+      message += `時間: ${time}\n`;
+      message += `人数: ${guests}\n`;
+      if (notes) {
+        message += `ご要望: ${notes}\n`;
+      }
+
+      alert(message);
+      this.reset();
+    });
+  </script>
+</body>
+</html>
